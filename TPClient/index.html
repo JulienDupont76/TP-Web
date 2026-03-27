@@ -19,7 +19,16 @@
 					<p class="header-kicker">Live — Forum</p>
 					<h1>Message<span>Board</span></h1>
 					<p class="header-sub">Posez vos messages. Lisez ceux des autres.</p>
-					<input id="api-url" value="http://localhost:8080" />
+
+					<div class="api-config">
+						<button id="toggle-api" class="api-toggle">⚙ API</button>
+
+						<div class="api-panel" id="api-panel">
+							<label for="api-url">Serveur API</label>
+							<input id="api-url" type="text" placeholder="https://..." />
+							<button id="save-api" class="btn-secondary">Enregistrer</button>
+						</div>
+					</div>
 				</div>
 				<button
 					class="theme-toggle"

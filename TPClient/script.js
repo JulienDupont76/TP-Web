@@ -35,14 +35,42 @@ const loadMessages = async () => {
 		const response = await APIClient.get(ENDPOINTS.GET_ALL_MESSAGES);
 		if (response.code === 1) {
 			msgs = response.msgs;
-			console.log('Messages chargés :', msgs);
+
 			update(msgs);
+			updateCount();
 		} else {
 			showToast('Erreur lors du chargement des messages');
 		}
 	} catch (error) {
 		console.error('Error fetching messages:', error);
 		showToast('Erreur serveur');
+	}
+};
+
+const deleteMessage = async (id) => {
+	try {
+		const response = await APIClient.get(`/msg/del/${id}`);
+
+		if (response.code === 1) {
+			showToast('🗑 Message supprimé');
+			loadMessages();
+		} else {
+			showToast('Erreur suppression');
+		}
+	} catch (error) {
+		console.error(error);
+		showToast('Erreur serveur');
+	}
+};
+
+const updateCount = async () => {
+	try {
+		const res = await APIClient.get('/msg/nber');
+		if (res.code === 1) {
+			document.getElementById('msg-count').textContent = res.nber;
+		}
+	} catch (e) {
+		console.error(e);
 	}
 };
 
@@ -77,6 +105,8 @@ const update = (tableau) => {
 		const li = document.createElement('li');
 		li.style.animationDelay = index * 40 + 'ms';
 
+		li.dataset.id = index;
+
 		const avatar = document.createElement('div');
 		avatar.className = 'msg-avatar';
 		avatar.setAttribute('aria-hidden', 'true');
@@ -101,13 +131,29 @@ const update = (tableau) => {
 		textEl.className = 'msg-text';
 		textEl.textContent = item.msg;
 
+		const delBtn = document.createElement('button');
+		delBtn.className = 'btn-delete';
+		delBtn.textContent = '✕';
+
+		delBtn.addEventListener('click', () => {
+			li.classList.add('removing');
+
+			setTimeout(() => {
+				deleteMessage(index);
+			}, 300);
+		});
+
+		li.addEventListener('click', async () => {
+			const res = await APIClient.get(`/msg/get/${index}`);
+			console.log('Message detail:', res);
+		});
+
 		li.appendChild(avatar);
 		li.appendChild(header);
 		li.appendChild(textEl);
+		li.appendChild(delBtn);
 		ul.appendChild(li);
 	});
-
-	document.getElementById('msg-count').textContent = tableau.length;
 };
 
 const showToast = (texte) => {
@@ -202,4 +248,18 @@ document.getElementById('message-input').addEventListener('keydown', (e) => {
 
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
-document.getElementById('api-url').addEventListener('change', updateApiUrl);
+const toggleApiBtn = document.getElementById('toggle-api');
+const apiPanel = document.getElementById('api-panel');
+
+toggleApiBtn.addEventListener('click', () => {
+	apiPanel.classList.toggle('open');
+});
+
+document.getElementById('save-api').addEventListener('click', updateApiUrl);
+document.getElementById('api-url').addEventListener('keydown', (e) => {
+	if (e.key === 'Enter') updateApiUrl();
+});
+document.getElementById('api-url').value = baseUrl;
+
+const ul = document.getElementById('message-list');
+ul.scrollTop = ul.scrollHeight;
