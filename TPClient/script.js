@@ -1,7 +1,7 @@
 import ApiClient from './APIClient.js';
 import { ENDPOINTS } from './endpoints.js';
 
-const baseUrl = 'http://localhost:8080';
+const baseUrl = 'https://tp-web-ngua.onrender.com';
 
 let APIClient = ApiClient.getInstance(baseUrl, {});
 
