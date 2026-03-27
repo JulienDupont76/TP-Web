@@ -49,7 +49,7 @@ const loadMessages = async () => {
 
 const deleteMessage = async (id) => {
 	try {
-		const response = await APIClient.get(`/msg/del/${id}`);
+		const response = await APIClient.get(`${ENDPOINTS.DELETE_MESSAGE}/${id}`);
 
 		if (response.code === 1) {
 			showToast('🗑 Message supprimé');
@@ -65,7 +65,7 @@ const deleteMessage = async (id) => {
 
 const updateCount = async () => {
 	try {
-		const res = await APIClient.get('/msg/nber');
+		const res = await APIClient.get(ENDPOINTS.GET_MESSAGE_COUNT);
 		if (res.code === 1) {
 			document.getElementById('msg-count').textContent = res.nber;
 		}
@@ -144,7 +144,7 @@ const update = (tableau) => {
 		});
 
 		li.addEventListener('click', async () => {
-			const res = await APIClient.get(`/msg/get/${index}`);
+			const res = await APIClient.get(`${ENDPOINTS.GET_MESSAGE}/${index}`);
 			console.log('Message detail:', res);
 		});
 

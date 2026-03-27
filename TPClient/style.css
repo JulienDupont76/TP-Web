@@ -497,7 +497,7 @@ textarea:focus {
 
 #message-list li:hover .btn-delete {
 	opacity: 1;
-	color: var(--accent-2);
+	color: var(--accent);
 }
 
 .btn-delete:hover {
