@@ -1,13 +1,18 @@
 # TP Web - MessageBoard (Client + Micro-service Node.js)
 
+## Déploiement Render
+
+Le projet a été déployé sur Render :
+
+- Client : `https://tp-web-client.onrender.com/`
+- Serveur : `https://tp-web-ngua.onrender.com`
+
 ## Objectif du TP
 
 Ce TP avait pour but de construire une petite application de messagerie web en deux parties :
 
 - un client web (HTML/CSS/JavaScript) pour afficher et publier des messages ;
 - un micro-service Node.js (Express) pour stocker les messages en mémoire et exposer des routes HTTP.
-
-L'ensemble correspond aux consignes des parties "client" (mockup + dynamique JS) et "serveur" (routes de gestion des messages + intégration AJAX).
 
 ## Organisation du projet
 
@@ -25,7 +30,7 @@ L'ensemble correspond aux consignes des parties "client" (mockup + dynamique JS)
 
 ### 1) Côté serveur
 
-Le serveur est implémenté avec Express (mode ES module).
+Le serveur est implémenté avec Express.
 
 Choix principaux :
 
@@ -37,7 +42,7 @@ Choix principaux :
 Routes implémentées :
 
 - `/test/*subPath` : renvoie la sous-route dans `{ msg: ... }`
-- `/cpt/query` et `/cpt/inc` : micro-service d'état (compteur) demandé dans la partie intermédiaire
+- `/cpt/query` et `/cpt/inc` : micro-service d'état (compteur)
 - `/msg/post/*subPath` : ajoute un message
 - `/msg/get/:id` : récupère un message par indice
 - `/msg/getAll` : récupère tous les messages
@@ -79,7 +84,7 @@ Conséquences :
 
 ### 3) Côté client
 
-Le client est en JavaScript moderne (`type="module"`) avec séparation des responsabilités :
+Le client est en JavaScript avec séparation des responsabilités :
 
 - `APIClient.js` encapsule `fetch` et le parsing des réponses ;
 - `endpoints.js` évite les routes codées en dur partout ;
@@ -99,14 +104,6 @@ Fonctionnalités réalisées :
 
 Le format de date est affiché au format local français (`toLocaleString('fr-FR', ...)`).
 
-## Ce qui répond aux consignes
-
-- réalisation d'un micro-service de messages avec routes de post/get/getAll/nber/del ;
-- intégration AJAX côté client avec `fetch` (via `APIClient`) ;
-- remplissage dynamique de la liste depuis le serveur ;
-- prise en compte de métadonnées supplémentaires (pseudo + date) ;
-- possibilité de changer le style (thème clair/sombre).
-
 ## Limites actuelles
 
 - persistance absente (données en RAM uniquement) ;
@@ -116,11 +113,9 @@ Le format de date est affiché au format local français (`toLocaleString('fr-FR
 
 ## Pistes d'amélioration
 
-- passer à une base de données (SQLite/PostgreSQL) ;
+- passer à une base de données ;
 - introduire de vrais identifiants stables (`id`) ;
 - utiliser `POST`/`DELETE` côté API ;
-- ajouter validation plus stricte et tests automatisés ;
-- sécuriser l'API (authentification, limitation de débit, etc.).
 
 ## Lancement
 
