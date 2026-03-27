@@ -4,7 +4,7 @@
 
 Le projet a été déployé sur Render :
 
-- Client : `https://tp-web-client.onrender.com/`
+- Client : `https://tp-web-client.onrender.com`
 - Serveur : `https://tp-web-ngua.onrender.com`
 
 ## Objectif du TP
