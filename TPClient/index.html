@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MessageBoard — Forum Live</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body>
+		<div class="app-wrapper">
+			<header>
+				<div class="header-left">
+					<p class="header-kicker">Live — Forum</p>
+					<h1>Message<span>Board</span></h1>
+					<p class="header-sub">Posez vos messages. Lisez ceux des autres.</p>
+					<input id="api-url" value="http://localhost:8080" />
+				</div>
+				<button
+					class="theme-toggle"
+					id="theme-toggle"
+					aria-label="Changer le thème"
+				>
+					<span class="icon" id="theme-icon">☀️</span>
+					<span id="theme-label">Clair</span>
+				</button>
+			</header>
+
+			<section class="feed" aria-labelledby="feed-heading">
+				<h2 class="section-label" id="feed-heading">Messages</h2>
+				<ul
+					id="message-list"
+					aria-live="polite"
+					aria-label="Liste des messages"
+				></ul>
+			</section>
+
+			<section class="compose" aria-labelledby="compose-heading">
+				<h2 class="section-label" id="compose-heading">Nouveau message</h2>
+				<div class="compose-fields">
+					<div class="field-group">
+						<label for="pseudo-input">Pseudo</label>
+						<input
+							type="text"
+							id="pseudo-input"
+							placeholder="Votre pseudo..."
+							maxlength="32"
+						/>
+					</div>
+					<div class="field-group">
+						<label for="message-input">Message</label>
+						<textarea
+							id="message-input"
+							placeholder="Écrivez votre message..."
+						></textarea>
+					</div>
+				</div>
+				<div class="compose-actions">
+					<button class="btn-secondary" id="btn-update" type="button">
+						↻ Rafraîchir
+					</button>
+					<button class="btn-primary" id="btn-send" type="button">
+						Envoyer →
+					</button>
+				</div>
+			</section>
+
+			<div class="status-bar">
+				<span>MessageBoard v1.0 — JS TD</span>
+				<span
+					><span class="status-count" id="msg-count">0</span> message(s)</span
+				>
+			</div>
+		</div>
+
+		<div id="toast" role="status" aria-live="polite"></div>
+
+		<script type="module" src="script.js"></script>
+	</body>
+</html>
