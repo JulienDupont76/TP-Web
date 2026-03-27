@@ -196,7 +196,7 @@ const sendMessage = async () => {
 			showToast("Erreur lors de l'envoi");
 		}
 	} catch (error) {
-		console.error(err);
+		console.error(error);
 		showToast('Erreur serveur');
 	}
 };

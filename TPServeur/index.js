@@ -66,14 +66,14 @@ const parseIndex = (str) => {
 
 app.get('/msg/post/*subPath', (req, res) => {
 	const raw = req.params.subPath;
-	const text = unescape(raw).trim();
+	const text = decodeURIComponent(raw).trim();
 
 	if (!text) {
 		return res.json({ code: 0 });
 	}
 
 	const pseudo = req.query.pseudo
-		? unescape(req.query.pseudo).trim()
+		? decodeURIComponent(req.query.pseudo).trim()
 		: 'anonyme';
 
 	const newMsg = {
